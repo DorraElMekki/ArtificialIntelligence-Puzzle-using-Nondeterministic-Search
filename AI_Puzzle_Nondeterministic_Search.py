@@ -7,7 +7,7 @@ Considering our operations we have 16 possible states :
 *The initial and goal states : 
 	Initial state : (0,0) 
 	Goal state : (8,y)  
-we donâ€™t care about the value of y. So it can be one of this possible values {0, 2, 4, 6}
+we don't care about the value of y. So it can be one of this possible values {0, 2, 4, 6}
 *The operators :
 We have 6 operators :
 We suppose that :
