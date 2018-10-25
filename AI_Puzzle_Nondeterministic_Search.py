@@ -7,7 +7,7 @@ Considering our operations we have 16 possible states :
 *The initial and goal states : 
 	Initial state : (0,0) 
 	Goal state : (8,y)  
-we don’t care about the value of y. So it can be one of this possible values {0, 2, 4, 6}
+we donâ€™t care about the value of y. So it can be one of this possible values {0, 2, 4, 6}
 *The operators :
 We have 6 operators :
 We suppose that :
@@ -43,53 +43,42 @@ We calculate the total number of possible states from each corrent state divided
 #python 3.5.2
 from random import randint
 from numpy import *
+import inspect
 
+def LogOperation(a,b,path):
+    global RandomAccessQueue
+    frame,filename,line_number,function_name,lines,index = inspect.stack()[1]
+    path=path+'\n'+ function_name +'(' + str(a)+','+str(b)+')'
+    RandomAccessQueue= append(RandomAccessQueue,[[a,b,path]],0)
+    
 ######### our operators
 def FillA(a,b,path):
-    global RandomAccessQueue
     a=10
-    path=path+'\nFillA(' + str(a)+','+str(b)+')'
-    RandomAccessQueue= append(RandomAccessQueue,[[a,b,path]],0)
-    return 0
+    LogOperation(a,b,path)
 
 def FillB(a,b,path):
-    global RandomAccessQueue
     b=6
-    path=path+'\nFillB(' + str(a)+','+str(b)+')'
-    RandomAccessQueue= append(RandomAccessQueue,[[a,b,path]],0)
-    return 0
+    LogOperation(a,b,path)
 
 def PourAB(a,b,path):
-    global RandomAccessQueue
     x=max(0,a+b-6)
     b=min(6,a+b)
     a=x
-    path=path+'\nPourAB(' + str(a)+','+str(b)+')'
-    RandomAccessQueue= append(RandomAccessQueue,[[a,b,path]],0)
-    return 0
+    LogOperation(a,b,path)
 
 def PourBA(a,b,path):
-     global RandomAccessQueue
-     x=min(10,a+b)
-     b=max(0,a+b-10)
-     a=x
-     path=path+'\nPourBA(' + str(a)+','+str(b)+')'
-     RandomAccessQueue= append(RandomAccessQueue,[[a,b,path]],0)
-     return 0
+    x=min(10,a+b)
+    b=max(0,a+b-10)
+    a=x
+    LogOperation(a,b,path)
         
 def DumpA(a,b,path): 
-    global RandomAccessQueue
     a=0
-    path=path+'\nDumpA(' + str(a)+','+str(b)+')'
-    RandomAccessQueue= append(RandomAccessQueue,[[a,b,path]],0)
-    return 0
-
+    LogOperation(a,b,path)
+    
 def DumpB(a,b,path):
-    global RandomAccessQueue
     b=0
-    path=path+'\nDumpB(' + str(a)+','+str(b)+')'
-    RandomAccessQueue= append(RandomAccessQueue,[[a,b,path]],0)
-    return 0
+    LogOperation(a,b,path)
 ##########
 def TryAll(a,b,path):
     global SizeRandomAccessQueue   
@@ -100,7 +89,7 @@ def TryAll(a,b,path):
     DumpA(a,b,path)
     DumpB(a,b,path)
     SizeRandomAccessQueue=SizeRandomAccessQueue+6
-    return 0
+
 #########
 White=0 #no visited
 Black=1 #visited
