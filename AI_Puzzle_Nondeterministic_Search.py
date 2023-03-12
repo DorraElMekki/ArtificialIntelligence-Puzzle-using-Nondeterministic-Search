@@ -97,38 +97,33 @@ Black=1 #visited
 #initialize all states as no visited
 rows =11
 columns= 7
-Visited = [[0 for x in range(columns)] for x in range(rows)]
+Visited = [[0 for _ in range(columns)] for _ in range(rows)]
 for i in range(rows):
     for j in range(columns):
         Visited[i][j] = White
 
 
-RandomAccessQueue= []
-RandomAccessQueue.append([0, 0,'InitialState(0 0)']) #initial state 
+RandomAccessQueue = [[0, 0, 'InitialState(0 0)']]
 SizeRandomAccessQueue=1
 
 i=1
 while SizeRandomAccessQueue>0:
 
  
- RandomIndex=randint(0,SizeRandomAccessQueue-1)
- JugALevel=int(RandomAccessQueue[RandomIndex][0])
- JugBLevel=int(RandomAccessQueue[RandomIndex][1])
- Path=RandomAccessQueue[RandomIndex][2] 
- 
+    RandomIndex=randint(0,SizeRandomAccessQueue-1)
+    JugALevel=int(RandomAccessQueue[RandomIndex][0])
+    JugBLevel=int(RandomAccessQueue[RandomIndex][1])
+    Path=RandomAccessQueue[RandomIndex][2] 
 
- if(Visited[int(JugALevel)][int(JugBLevel)]==Black):
-  RandomAccessQueue=delete(RandomAccessQueue,[RandomIndex],0)
-  SizeRandomAccessQueue=SizeRandomAccessQueue-1 
- else:
-  Visited[JugALevel][JugBLevel]=Black
-  TryAll(JugALevel,JugBLevel,Path)
-  RandomAccessQueue=delete(RandomAccessQueue,[RandomIndex],0)
-  SizeRandomAccessQueue=SizeRandomAccessQueue-1
 
- if (JugALevel==8):
-  print(Path) 
-  break
+    if Visited[JugALevel][JugBLevel] != Black:
+        Visited[JugALevel][JugBLevel]=Black
+        TryAll(JugALevel,JugBLevel,Path)
+    SizeRandomAccessQueue -= 1
+    RandomAccessQueue=delete(RandomAccessQueue,[RandomIndex],0)
+    if (JugALevel==8):
+     print(Path) 
+     break
 
 
 
